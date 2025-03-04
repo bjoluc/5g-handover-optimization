@@ -1,0 +1,5 @@
+*.pyc
+.venv/
+logs/
+models/
+optuna/

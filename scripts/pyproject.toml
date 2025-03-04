@@ -1,0 +1,24 @@
+[tool.poetry]
+package-mode = true
+authors = ["bjoluc <mail@bjoluc.de>"]
+description = ""
+name="scripts"
+version="0.1.0"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+scipy = "^1.14.1"
+matplotlib = "^3.9.2"
+numpy = "^2.1.2"
+sympy = "^1.13.3"
+handyscope = "^1.2.0"
+PyGObject = "^3.50.0"
+pyperclip = "^1.9.0"
+tqdm = "^4.67.1"
+plotille = "^5.0.0"
+ue-power-model-5g = { path = "../power-model/", develop = true }
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

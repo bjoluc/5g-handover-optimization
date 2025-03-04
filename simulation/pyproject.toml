@@ -1,0 +1,34 @@
+[tool.poetry]
+package-mode = true
+authors = []
+description = ""
+name="simulator"
+version="0.1.0"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+stable-baselines3 = {version = "2.4.0", extras = ["extra"]}
+optuna = "^4.1.0"
+psycopg2 = "^2.9.10"
+ue-power-model-5g = { path = "../power-model/", develop = true }
+matplotlib = "^3.10.0"
+seaborn = "^0.13.2"
+numpy = "1.26.4"
+svgpath2mpl = "^1.0.0"
+
+[tool.poetry.scripts]
+random = 'simulator.scripts.random:run'
+train = 'simulator.scripts.train:run'
+apply = 'simulator.scripts.apply:run'
+evaluate = 'simulator.scripts.evaluate:run'
+hparams = 'simulator.scripts.optimize_hyperparameters:run'
+
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
+optuna-dashboard = "^0.17.0"
+tensorboard = "^2.18.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

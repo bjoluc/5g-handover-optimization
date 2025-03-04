@@ -1,0 +1,18 @@
+[tool.poetry]
+package-mode = true
+authors = ["bjoluc <mail@bjoluc.de>"]
+description = ""
+name="ue-power-model-5g"
+version="0.1.0"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+numpy = "*"
+
+[build-system]
+requires = ["poetry-core", "setuptools", "Cython"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.build]
+generate-setup-file = false
+script = "build.py"

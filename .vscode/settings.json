@@ -1,0 +1,16 @@
+{
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    }
+  },
+  "isort.args": ["--profile", "black"],
+  "C_Cpp.clang_format_style": "Google",
+  "files.associations": {
+    "iostream": "cpp",
+    "random": "cpp",
+    "vector": "cpp"
+  }
+}
