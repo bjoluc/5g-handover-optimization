@@ -31,7 +31,7 @@ class Channel:
         power = 10 ** ((self.base_station.tx_power - loss) / 10)
         return power / (ue.noise * self.base_station.bandwidth)
 
-    def compute_maximal_datarate(self, snr: float):
+    def compute_maximal_data_rate(self, snr: float):
         """Calculate max. data rate (Bps) for transmission between BS and UE."""
         return self.base_station.bandwidth * log2(1 + snr)
 
@@ -58,13 +58,13 @@ class Channel:
             def drate(point):
                 dummy.move()  # To reset the UE's SNR cache
                 dummy.position.x, dummy.position.y = point
-                return self.compute_maximal_datarate(self.compute_snr(dummy))
+                return self.compute_maximal_data_rate(self.compute_snr(dummy))
 
             points = zip(xs.tolist(), ys.tolist())
-            datarates = np.asarray(list(map(drate, points)))
+            data_rates = np.asarray(list(map(drate, points)))
 
             # find largest / smallest x coordinate where drate is exceeded
-            (idx,) = np.where(datarates > dthresh)
+            (idx,) = np.where(data_rates > dthresh)
             idx = np.max(idx)
 
             isoline.append((xs[idx], ys[idx]))

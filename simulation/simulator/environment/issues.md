@@ -1,12 +1,12 @@
 # Issues (or potential issues) with mobile-env
 
-- Invalid observations after moving UEs and re-computing datarates: Broken connections are not removed immediately after moving UEs (but at the beginning of the next step), leading to invalid observations (availability of BSs) (?)
+- Invalid observations after moving UEs and re-computing data rates: Broken connections are not removed immediately after moving UEs (but at the beginning of the next step), leading to invalid observations (availability of BSs) (?)
 - Physical stuff:
   - Channel model takes km, not m
   - Bandwidth needs to be taken into account for noise power calculation – invalid noise power value (not per Hertz)
   - Highly unrealistic UE SNR threshold
   - Okumura-Hata model not applicable in chosen frequency range, as per the Wikipedia page
-  - SNR threshold is a UE property. However, the Shannon bound which is used for the datarate calculations involves the channel bandwidth. The SNR threshold thus needs to incorporate the bandwidth (which is a BS property in the data model) to make the cell edge depend on the channel bandwidth. Better drop `snr_threshold`, rely on the Shannon bound, and introduce `minimal_datarate` (in bits per second).
+  - SNR threshold is a UE property. However, the Shannon bound which is used for the data rate calculations involves the channel bandwidth. The SNR threshold thus needs to incorporate the bandwidth (which is a BS property in the data model) to make the cell edge depend on the channel bandwidth. Better drop `snr_threshold`, rely on the Shannon bound, and introduce `minimal_data_rate` (in bits per second).
 - Visualization performance can be improved significantly by reusing static "actors" across frames
 - Simulation performance:
   - Creating Point objects is terribly slow (0.01 s per point on my notebook)

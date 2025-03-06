@@ -2,7 +2,7 @@ import numpy as np
 from simulator.environment.core.environment import BaseEnvironment
 from simulator.environment.core.metrics import (
     connected_ues,
-    mean_datarate,
+    mean_data_rate,
     mean_utility,
 )
 from simulator.environments import make_environment
@@ -27,7 +27,7 @@ class TensorboardEvalLogCallback(BaseCallback):
 
         for metric in [
             "mean_utility",
-            "mean_datarate",
+            "mean_data_rate",
             "connected_ues",
             "mean_connected_ue_power",
             "utility_fairness",
@@ -90,7 +90,7 @@ def run():
     evaluation_environment.monitor.is_resettable = False
     # Add relevant metrics to monitor environment for logging:
     evaluation_environment.monitor.add_metric("mean_utility", mean_utility)
-    evaluation_environment.monitor.add_metric("mean_datarate", mean_datarate)
+    evaluation_environment.monitor.add_metric("mean_data_rate", mean_data_rate)
     evaluation_environment.monitor.add_metric("connected_ues", connected_ues)
     evaluation_environment.monitor.add_metric(
         "mean_connected_ue_power", mean_connected_ue_power

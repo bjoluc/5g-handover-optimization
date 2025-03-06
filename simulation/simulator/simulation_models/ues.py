@@ -40,14 +40,14 @@ class AppAwareUserEquipment(UserEquipment):
         )
 
     @property
-    def desired_datarate(self):
-        """Highest datarate (in bits/s) that the UE desires."""
-        return self._application.desired_datarate + self.minimal_datarate
+    def desired_data_rate(self):
+        """Highest data rate (in bits/s) that the UE desires."""
+        return self._application.desired_data_rate + self.minimal_data_rate
 
     @cache
     def get_utility(self):
         if not self.is_connected():
             return -1
 
-        datarate = self.get_datarate() - self.minimal_datarate
-        return self._application.get_qoe_by_datarate(datarate)
+        data_rate = self.get_data_rate() - self.minimal_data_rate
+        return self._application.get_qoe_by_data_rate(data_rate)

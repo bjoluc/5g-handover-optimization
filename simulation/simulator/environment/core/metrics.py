@@ -18,9 +18,9 @@ def connected_ues(sim: BaseEnvironment):
     return sum([int(ue.is_connected()) for ue in sim.ues])
 
 
-def mean_datarate(sim: BaseEnvironment):
+def mean_data_rate(sim: BaseEnvironment):
     """Calculates the average data rate (in Mbps) of UEs."""
-    return np.mean([ue.get_datarate() for ue in sim.ues]) * 1e-6
+    return np.mean([ue.get_data_rate() for ue in sim.ues]) * 1e-6
 
 
 def mean_utility(sim: BaseEnvironment):

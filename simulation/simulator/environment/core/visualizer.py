@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING
 from matplotlib.artist import Artist
 from matplotlib.figure import Figure
 from simulator.environment.core import metrics
-from simulator.environment.core.default_constants import MINIMAL_UE_DATARATE
+from simulator.environment.core.default_constants import MINIMAL_UE_DATA_RATE
 from simulator.environment.core.util import BS_SYMBOL
 
 if TYPE_CHECKING:
@@ -40,7 +40,7 @@ class Visualizer:
         for metric in {
             "connected_ues": metrics.connected_ues,
             "mean_utility": metrics.mean_utility,
-            "mean_datarate": metrics.mean_datarate,
+            "mean_data_rate": metrics.mean_data_rate,
         }.items():
             self.environment.monitor.add_metric(*metric)
 
@@ -190,9 +190,9 @@ class Visualizer:
             )
 
             # Plot BS ranges where UEs may connect or can receive at most 5 Mbps
-            for datarate, color in [(MINIMAL_UE_DATARATE, "gray"), (5e6, "black")]:
+            for data_rate, color in [(MINIMAL_UE_DATA_RATE, "gray"), (5e6, "black")]:
                 ax.scatter(
-                    *bs.channel.isoline(self.environment.size, datarate),
+                    *bs.channel.isoline(self.environment.size, data_rate),
                     color=color,
                     s=3,
                 )
@@ -222,7 +222,7 @@ class Visualizer:
             for connection in bs.connections.values():
                 ue = connection.ue
                 # color is connection's contribution to the UE's total utility
-                share = connection.current_datarate / ue.get_datarate()
+                share = connection.current_data_rate / ue.get_data_rate()
                 color = self.utility_colormap(
                     share * self.normalize_utility(ue.get_utility())
                 )
@@ -247,15 +247,15 @@ class Visualizer:
         mean_utility = mean_utilities[-1]
         total_mean_utility = np.mean(mean_utilities)
 
-        mean_datarates = self.environment.monitor.get_metric_history("mean_datarate")
-        mean_datarate = mean_datarates[-1]
-        total_mean_datarate = np.mean(mean_datarates)
+        mean_data_rates = self.environment.monitor.get_metric_history("mean_data_rate")
+        mean_data_rate = mean_data_rates[-1]
+        total_mean_data_rate = np.mean(mean_data_rates)
 
         rows = ["Current", "History"]
         cols = ["Avg. DR [Mbps]", "Avg. Utility"]
         text = [
-            [f"{mean_datarate*1e-6:.3f}", f"{mean_utility:.3f}"],
-            [f"{total_mean_datarate*1e-6:.3}", f"{total_mean_utility:.3f}"],
+            [f"{mean_data_rate*1e-6:.3f}", f"{mean_utility:.3f}"],
+            [f"{total_mean_data_rate*1e-6:.3}", f"{total_mean_utility:.3f}"],
         ]
 
         table = self.dashboard_ax.table(

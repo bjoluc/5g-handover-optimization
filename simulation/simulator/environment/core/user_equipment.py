@@ -7,7 +7,7 @@ from typing import TYPE_CHECKING
 import numpy as np
 from simulator.environment.core.connection import Connection
 from simulator.environment.core.default_constants import (
-    MINIMAL_UE_DATARATE,
+    MINIMAL_UE_DATA_RATE,
     THERMAL_NOISE,
 )
 from simulator.environment.core.movement import Movement
@@ -21,13 +21,13 @@ class UserEquipment:
     def __init__(
         self,
         velocity=15,  # m per step
-        minimal_datarate=MINIMAL_UE_DATARATE,  # bits/s
+        minimal_data_rate=MINIMAL_UE_DATA_RATE,  # bits/s
         noise=THERMAL_NOISE,  # mW/Hz
         height=1.5,  # m
         movement: Movement = None,
     ):
         self._velocity = velocity
-        self.minimal_datarate = minimal_datarate
+        self.minimal_data_rate = minimal_data_rate
         self.noise = noise
         self.height = height
 
@@ -44,7 +44,7 @@ class UserEquipment:
 
     def _reset_caches(self):
         self.get_snr.cache_clear()
-        self.get_maximal_datarate.cache_clear()
+        self.get_maximal_data_rate.cache_clear()
         self.get_utility.cache_clear()
 
     def reset(self, rng: np.random.Generator):
@@ -66,7 +66,7 @@ class UserEquipment:
         for bs, connection in list(self.connections.items()):
             if self.can_connect_to(bs):
                 connection.snr = self.get_snr(bs)
-                connection.maximal_datarate = self.get_maximal_datarate(bs)
+                connection.maximal_data_rate = self.get_maximal_data_rate(bs)
             else:
                 self.disconnect_from(connection.bs)
 
@@ -75,18 +75,18 @@ class UserEquipment:
         return bs.channel.compute_snr(self)
 
     @cache
-    def get_maximal_datarate(self, bs: BaseStation):
-        return bs.channel.compute_maximal_datarate(self.get_snr(bs))
+    def get_maximal_data_rate(self, bs: BaseStation):
+        return bs.channel.compute_maximal_data_rate(self.get_snr(bs))
 
     def can_connect_to(self, bs: BaseStation):
-        return self.get_maximal_datarate(bs) >= self.minimal_datarate
+        return self.get_maximal_data_rate(bs) >= self.minimal_data_rate
 
     def connect_to(self, bs: BaseStation):
         connection = Connection(
             bs,
             self,
             snr=self.get_snr(bs),
-            maximal_datarate=self.get_maximal_datarate(bs),
+            maximal_data_rate=self.get_maximal_data_rate(bs),
         )
 
         self.connections[bs] = connection
@@ -108,10 +108,10 @@ class UserEquipment:
             bs.connections.pop(self)
         self.connections.clear()
 
-    def get_datarate(self):
-        """Returns the joint datarate of all the UE's connections"""
+    def get_data_rate(self):
+        """Returns the joint data rate of all the UE's connections"""
         return sum(
-            [connection.current_datarate for connection in self.connections.values()]
+            [connection.current_data_rate for connection in self.connections.values()]
         )
 
     @cache
@@ -122,8 +122,8 @@ class UserEquipment:
         method must only be called after the BSs have scheduled their resources. The
         environment's `step()` method does this right after moving the UEs.
         """
-        datarate = (self.get_datarate() - self.minimal_datarate) * 1e-6  # Mbps
-        if datarate <= 0.0:
+        data_rate = (self.get_data_rate() - self.minimal_data_rate) * 1e-6  # Mbps
+        if data_rate <= 0.0:
             return -1
 
-        return clip(0.5 * log10(datarate), -1, 1)
+        return clip(0.5 * log10(data_rate), -1, 1)

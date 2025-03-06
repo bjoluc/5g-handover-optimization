@@ -2,7 +2,7 @@ import numpy as np
 from simulator.agents import RlAgent, SnrAgent
 from simulator.environment.core.metrics import (
     connected_ues,
-    mean_datarate,
+    mean_data_rate,
     mean_utility,
 )
 from simulator.environments import make_environment
@@ -19,7 +19,7 @@ def run():
         seed=0,
     )
     environment.monitor.add_metric("mean_utility", mean_utility)
-    environment.monitor.add_metric("mean_datarate", mean_datarate)
+    environment.monitor.add_metric("mean_data_rate", mean_data_rate)
     environment.monitor.add_metric("connected_ues", connected_ues)
     environment.monitor.add_metric("mean_connected_ue_power", mean_connected_ue_power)
     environment.monitor.add_metric("utility_fairness", utility_fairness)
@@ -40,7 +40,7 @@ def run():
 
     for label, id in {
         "Avg. UE Utility": "mean_utility",
-        "Avg. UE Data Rate (Mbps)": "mean_datarate",
+        "Avg. UE Data Rate (Mbps)": "mean_data_rate",
         "Avg. Number of Connected UEs": "connected_ues",
         "Avg. UE Utility Fairness": "utility_fairness",
         "Avg. Connected UE Power (PU)": "mean_connected_ue_power",

@@ -17,11 +17,13 @@ class Scheduler:
 class ResourceFair(Scheduler):
     def update_data_rates(self, bs, connections):
         for connection in connections:
-            connection.current_datarate = connection.maximal_datarate / len(connections)
+            connection.current_data_rate = connection.maximal_data_rate / len(
+                connections
+            )
 
 
 class RateFair(Scheduler):
     def update_data_rates(self, bs, connections):
-        rate = 1 / sum([1 / connection.maximal_datarate for connection in connections])
+        rate = 1 / sum([1 / connection.maximal_data_rate for connection in connections])
         for connection in connections:
-            connection.current_datarate = rate
+            connection.current_data_rate = rate
