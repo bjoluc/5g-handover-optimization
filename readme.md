@@ -8,7 +8,7 @@ For now, here's the abstract:
 > Handover decisions in mobile networks can significantly impact the Quality of Experience of mobile device users as they influence both the achievable data rate and the power consumption of a mobile device.
 > This thesis optimizes cellular handovers using a machine learning technique (Reinforcement Learning), considering both power consumption and data rates.
 > To quantify power consumption of mobile devices, a power model is developed and validated with power measurements in a commercial mobile network.
-> The model is subsequently integrated into a system-level simulator for cellular handovers and applied to jointly optimize data rates and power consumption of mobile network devices.
+> The model is subsequently integrated into a system-level simulator for cellular handovers and applied to jointly optimize data rates and power consumption of mobile network devices with respect to Quality of Experience.
 > Both the developed model and the handover simulation environment are publicly available and can be applied and extended in future network research.
 
 The repository contains the following projects:
