@@ -1,5 +1,6 @@
 import numpy as np
 from simulator.agents import RlAgent, SnrAgent
+from simulator.environment.core.environment import BaseEnvironment
 from simulator.environment.core.metrics import (
     connected_ues,
     mean_data_rate,
@@ -12,12 +13,13 @@ from simulator.utils import get_model_name
 RENDER = False
 
 
+def utilities(sim: BaseEnvironment):
+    return [ue.get_utility() for ue in sim.ues]
+
+
 def run():
-    environment = make_environment(
-        render=RENDER,
-        episode_duration=100000,
-        seed=0,
-    )
+    environment = make_environment(render=RENDER, episode_duration=1e6, seed=0)
+    # environment.monitor.add_metric("utilities", utilities)
     environment.monitor.add_metric("mean_utility", mean_utility)
     environment.monitor.add_metric("mean_data_rate", mean_data_rate)
     environment.monitor.add_metric("connected_ues", connected_ues)
@@ -36,8 +38,6 @@ def run():
         if RENDER:
             environment.render()
 
-    history = environment.monitor.get_metric_history("mean_connected_ue_power")
-
     for label, id in {
         "Avg. UE Utility": "mean_utility",
         "Avg. UE Data Rate (Mbps)": "mean_data_rate",
@@ -49,6 +49,9 @@ def run():
         mean = np.nanmean(history)
         std = np.nanstd(history)
         print(f"{label}: {mean:.4f} ({std:.4f})")
+
+    # utilities_history = environment.monitor.get_metric_history("utilities")
+    # store_kde_pdf_json(np.concatenate(utilities_history))
 
 
 def store_kde_pdf_json(values):
