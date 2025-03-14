@@ -20,6 +20,7 @@ svgpath2mpl = "^1.0.0"
 random = 'simulator.scripts.random:run'
 train = 'simulator.scripts.train:run'
 apply = 'simulator.scripts.apply:run'
+render = 'simulator.scripts.render:run'
 evaluate = 'simulator.scripts.evaluate:run'
 hparams = 'simulator.scripts.optimize_hyperparameters:run'
 
@@ -28,6 +29,7 @@ hparams = 'simulator.scripts.optimize_hyperparameters:run'
 ipykernel = "^6.29.5"
 optuna-dashboard = "^0.17.0"
 tensorboard = "^2.18.0"
+moviepy = "^2.1.2"
 
 [build-system]
 requires = ["poetry-core"]

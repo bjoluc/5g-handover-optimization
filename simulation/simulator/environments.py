@@ -78,7 +78,7 @@ class HandoverEnvironment(BaseEnvironment):
         )
         return max(-1, penalized_reward)
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         self.previous_snrs: dict[UserEquipment, NDArray] = {}
         return super().reset(seed)
 
@@ -106,7 +106,7 @@ class HandoverEnvironment(BaseEnvironment):
 
         connection = next(iter(ue.connections.values())) if ue.is_connected() else None
         is_better_snr_available = np.asarray(
-            [(1 if connection is None else max(snrs_raw) > connection.snr)],
+            [1 if connection is None else max(snrs_raw) > connection.snr],
             dtype=np.float32,
         )
 

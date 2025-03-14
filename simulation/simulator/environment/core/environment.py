@@ -46,7 +46,7 @@ class BaseEnvironment(gymnasium.Env):
         """Creates a `Movement` to be assigned to a UE"""
         return RandomWaypointMovement(self.size)
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options=None):
         # Create a new seeded RNG if this is the first time the environment is reset
         if seed is None and self.time is None:
             seed = self.seed + 4  # for compatibility with the original environment
@@ -106,9 +106,9 @@ class BaseEnvironment(gymnasium.Env):
         """true after max. time steps"""
         return self.time >= self.episode_duration
 
-    def render(self) -> None:
+    def render(self):
         if self.visualizer:
-            self.visualizer.render()
+            return self.visualizer.render()
 
     @property
     def action_space(self):

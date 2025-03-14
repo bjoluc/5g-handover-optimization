@@ -143,9 +143,9 @@ class Visualizer:
 
         if self.mode == "rgb_array":
             # render RGB image for e.g. video recording
-            data = np.frombuffer(self.canvas.tostring_rgb(), dtype=np.uint8)
-            # reshape image from 1d array to 2d array
-            return data.reshape(self.canvas.get_width_height()[::-1] + (3,))
+            width, height = self.canvas.get_width_height()
+            image = np.frombuffer(self.canvas.tostring_argb(), dtype=np.uint8)
+            return image.reshape((height, width, 4))[:, :, 1:]
 
         if self.mode == "human":
             # render RGBA image on pygame surface
