@@ -1,0 +1,5 @@
+watch:
+  typst watch --pdf-standard a-2b main.typ
+
+build:
+  typst compile --pdf-standard a-2b main.typ 

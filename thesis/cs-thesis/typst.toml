@@ -1,0 +1,12 @@
+[package]
+name = "cs-thesis"
+version = "0.1.0"
+entrypoint = "index.typ"
+authors = ["bjoluc <mail@bjoluc.de>"]
+license = "MIT-0"
+description = "Generic template for theses in Computer Science or related fields"
+categories = ["thesis"]
+homepage = ""
+keywords = []
+disciplines = ["computer-science", "engineering", "mathematics", "physics"]
+compiler = "0.13.1"

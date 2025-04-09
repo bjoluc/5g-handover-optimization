@@ -1,0 +1,5 @@
+watch:
+  typst watch --root .. slides.typ
+
+build:
+  typst compile --root .. slides.typ 
